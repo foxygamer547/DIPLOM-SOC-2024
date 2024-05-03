@@ -252,3 +252,19 @@ ossec_config>
     <log_format>syslog</log_format>
   </localfile>
 
+<!-- Включение модуля активного реагирования -->
+
+<command>
+    <name>windowsfirewall</name>
+    <executable>firewall.cmd</executable>
+    <timeout_allowed>yes</timeout_allowed>
+  </command>
+
+ <active-response>
+   <disabled>no</disabled>
+   <command>windowsfirewall</command>
+   <location>local</location>
+   <rules_id>3182</rules_id>
+   <timeout>60</timeout>
+  </active-response>
+
