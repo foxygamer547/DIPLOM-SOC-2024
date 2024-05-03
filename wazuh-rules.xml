@@ -220,6 +220,12 @@ ossec_config>
 
 </ossec_config>
 
+<agent_config os="linux">
+    <syscheck>
+        <directories check_all="yes" realtime="yes" report_changes="yes">/var/spool/cron/crontabs/</directories>
+    </syscheck>
+</agent_config>
+
 <!-- Источники данных Windows -->
 
 <!-- Log analysis -->
