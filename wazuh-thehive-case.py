@@ -69,10 +69,10 @@ def pr(data, prefix, alt):
 
 def md_format(alt, format_alt=''):
     md_title_dict = {}
-    # sorted with first key
+
     for now in alt:
         now = now[1:]
-        # fix first key last symbol
+     
         dot = now.split('|||')[0].find('.')
         if dot == -1:
             md_title_dict[now.split('|||')[0]] = [now]
@@ -90,14 +90,14 @@ def md_format(alt, format_alt=''):
 
 def artifact_detect(format_alt):
     artifacts_dict = {}
-    # IP addresses
+  
     artifacts_dict['ip'] = re.findall(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b', format_alt)
-    # URLs
+   
     artifacts_dict['url'] = re.findall(
         r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', format_alt)
-    # Domain names from URLs
+   
     artifacts_dict['domain'] = [urlparse(url).hostname for url in artifacts_dict['url']]
-    # MD5, SHA-1, and SHA-256 hashes
+   
     artifacts_dict['hash_md5'] = re.findall(r'\b[a-f0-9]{32}\b', format_alt, re.IGNORECASE)
     artifacts_dict['hash_sha1'] = re.findall(r'\b[a-f0-9]{40}\b', format_alt, re.IGNORECASE)
     artifacts_dict['hash_sha256'] = re.findall(r'\b[a-f0-9]{64}\b', format_alt, re.IGNORECASE)
@@ -134,7 +134,7 @@ def generate_case(format_alt, artifacts_dict, w_alert):
     severity = severity_levels.get(int(w_alert['rule']['level']), None)
     if severity is None:
         logger.warning("Unknown Wazuh alert level: {}".format(w_alert['rule']['level']))
-        severity = 0  # Set default severity as 0
+        severity = 0  
     case = Alert(title=w_alert['rule']['description'],
                  tlp=1,
                  severity=severity_levels.get(int(w_alert['rule']['level']), None),
