@@ -20,13 +20,13 @@ info_enabled = True
 pwd = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 log_file = '{0}/logs/integrations.log'.format(pwd)
 logger = logging.getLogger(__name__)
-# set logging level
+# Настройка уровня логирования
 logger.setLevel(logging.WARNING)
 if info_enabled:
     logger.setLevel(logging.INFO)
 if debug_enabled:
     logger.setLevel(logging.DEBUG)
-# create the logging file handler
+# Создание обработчика логов
 fh = logging.FileHandler(log_file)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 fh.setFormatter(formatter)
@@ -43,7 +43,7 @@ def main(args):
     thive_api_key = args[2]
     thive_api = TheHiveApi(thive, thive_api_key)
     logger.debug('#open alert file')
-    w_alert = json.load(open(alert_file_location))
+    w_alert = json.load(open(alert_file_location)) # Открытие и чтение файла с событиями Wazuh
     logger.debug('#alert data')
     logger.debug(str(w_alert))
     logger.debug('#gen json to dot-key-text')
